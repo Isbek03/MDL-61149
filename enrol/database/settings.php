@@ -31,7 +31,7 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_heading('enrol_database_exdbheader', get_string('settingsheaderdb', 'enrol_database'), ''));
 
-    $options = array('', "access", "ado_access", "ado", "ado_mssql", "borland_ibase", "csv", "db2", "fbsql", "firebird", "ibase", "informix72", "informix", "mssql", "mssql_n", "mssqlnative", "mysql", "mysqli", "mysqlt", "oci805", "oci8", "oci8po", "odbc", "odbc_mssql", "odbc_oracle", "oracle", "pdo", "postgres64", "postgres7", "postgres", "proxy", "sqlanywhere", "sybase", "vfp");
+    $options = array('', "access","ado_access", "ado", "ado_mssql", "borland_ibase", "csv", "db2", "fbsql", "firebird", "ibase", "informix72", "informix", "mssql", "mssql_n", "mssqlnative", "mysql", "mysqli", "mysqlt", "oci805", "oci8", "oci8po", "odbc", "odbc_mssql", "odbc_oracle", "oracle", "postgres64", "postgres7", "postgres", "proxy", "sqlanywhere", "sybase", "vfp");
     $options = array_combine($options, $options);
     $settings->add(new admin_setting_configselect('enrol_database/dbtype', get_string('dbtype', 'enrol_database'), get_string('dbtype_desc', 'enrol_database'), '', $options));
 
@@ -66,6 +66,9 @@ if ($ADMIN->fulltree) {
 
     $options = array('id'=>'id', 'idnumber'=>'idnumber');
     $settings->add(new admin_setting_configselect('enrol_database/localcategoryfield', get_string('localcategoryfield', 'enrol_database'), '', 'id', $options));
+
+    $options = array('id'=>'id', 'idnumber'=>'idnumber', 'shortname'=>'shortname');
+    $settings->add(new admin_setting_configselect('enrol_database/localtemplatefield', get_string('localtemplatefield', 'enrol_database'), '', 'idnumber', $options));
 
 
     $settings->add(new admin_setting_heading('enrol_database_remoteheader', get_string('settingsheaderremote', 'enrol_database'), ''));
@@ -109,11 +112,22 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('enrol_database/newcourseidnumber', get_string('newcourseidnumber', 'enrol_database'), '', 'idnumber'));
 
-    $settings->add(new admin_setting_configtext('enrol_database/newcoursecategory', get_string('newcoursecategory', 'enrol_database'), '', ''));
+    $settings->add(new admin_setting_configtext('enrol_database/newcoursesummary', get_string('newcoursesummary', 'enrol_database'), '', ''));
+
+    $settings->add(new admin_setting_configtext('enrol_database/newcoursetemplate', get_string('newcoursetemplate', 'enrol_database'), '', ''));
+
+    $settings->add(new admin_setting_configtext('enrol_database/newcoursecategory', get_string('newcoursecategory', 'enrol_database'), get_string('newcoursecategory_desc', 'enrol_database'), ''));
+
+    $settings->add(new admin_setting_configtext('enrol_database/newcoursecategorypath', get_string('newcoursecategorypath', 'enrol_database'), get_string('newcoursecategorypath_desc', 'enrol_database'), ''));
+
+    $settings->add(new admin_setting_configtext('enrol_database/categoryseparator', get_string('categoryseparator', 'enrol_database'), get_string('categoryseparator_desc', 'enrol_database'), ''));
+
+    $settings->add(new admin_setting_configcheckbox('enrol_database/autocreatecategory', get_string('autocreatecategory', 'enrol_database'), get_string('autocreatecategory_desc', 'enrol_database'), 0));
 
     require_once($CFG->dirroot.'/enrol/database/settingslib.php');
 
     $settings->add(new enrol_database_admin_setting_category('enrol_database/defaultcategory', get_string('defaultcategory', 'enrol_database'), get_string('defaultcategory_desc', 'enrol_database')));
 
     $settings->add(new admin_setting_configtext('enrol_database/templatecourse', get_string('templatecourse', 'enrol_database'), get_string('templatecourse_desc', 'enrol_database'), ''));
+
 }
